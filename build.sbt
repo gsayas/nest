@@ -9,6 +9,7 @@ scalaVersion := "2.13.14"
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.1" % Test
+libraryDependencies += "com.typesafe.slick" %% "slick" % "3.5.1"
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "io.giosayas.controllers._"
