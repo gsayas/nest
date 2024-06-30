@@ -1,18 +1,17 @@
-package application.usecase.impl //TODO review this package name
+package application.usecase.impl
 
 import javax.inject._
-import play.api.libs.json.Json
+import play.api.libs.json.{Json, JsObject}
 import application.usecase.FindAffordableHomesUseCase
-import play.api.libs.json.JsObject
+import domain.repository.HomeRepository // Assuming the repository is in the domain.repository package
+import scala.concurrent.Future
+import domain.model.Home
+
 
 @Singleton
-class FindAffordableHomesUseCaseImpl extends FindAffordableHomesUseCase {
-  override def execute(): JsObject = {
-    // Implement the logic to find affordable homes
-    // For now, returning a sample response
-    Json.obj(
-      "status" -> "success",
-      "message" -> "Here are the affordable homes."
-    )
+class FindAffordableHomesUseCaseImpl @Inject()(homeRepository: HomeRepository) extends FindAffordableHomesUseCase {
+  override def execute(): Future[Seq[Home]] = {
+    // Directly return the Future[Seq[Home]] from the repository
+    homeRepository.findAffordable(BigDecimal(100000))
   }
 }
