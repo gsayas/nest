@@ -6,15 +6,15 @@ import slick.jdbc.PostgresProfile.api._
 import scala.concurrent.Future
 import slick.jdbc.JdbcBackend.Database
 import javax.inject.Inject
+import infrastructure.db.HomeTable // Import your HomeTable definition
 
-class SlickHomeRepository @Inject()() extends HomeRepository {
+class SlickHomeRepository @Inject()(db: Database) extends HomeRepository {
+
+    private val homes = TableQuery[HomeTable]
   override def findAffordable(limit: BigDecimal): Future[Seq[Home]] = {
-    // Implement query using Slick
-    val mockHomes = Seq(
-      Home(123, "Mock Home 1", BigDecimal(100000)),
-      Home(456, "Mock Home 2", BigDecimal(150000)),
-      Home(789, "Mock Home 3", BigDecimal(200000))
-    )
-    Future.successful(mockHomes)
+   val query = homes.filter(_.price <= limit).result
+
+    // Execute the query
+    db.run(query)
   }
 }

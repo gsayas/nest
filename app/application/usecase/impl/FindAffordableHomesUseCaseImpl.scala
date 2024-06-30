@@ -12,6 +12,6 @@ import domain.model.Home
 class FindAffordableHomesUseCaseImpl @Inject()(homeRepository: HomeRepository) extends FindAffordableHomesUseCase {
   override def execute(): Future[Seq[Home]] = {
     // Directly return the Future[Seq[Home]] from the repository
-    homeRepository.findAffordable(BigDecimal(100000))
+    homeRepository.findAffordable(BigDecimal(1000000000))
   }
 }
