@@ -5,5 +5,5 @@ import scala.concurrent.Future
 import domain.model.Home
 
 trait FindAffordableHomesUseCase {
-  def execute(): Future[Seq[Home]] // TODO: return a List[AffortableHomeViewModel]?
+  def execute(): Future[Seq[Home]]
 }
